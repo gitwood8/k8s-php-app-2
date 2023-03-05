@@ -56,4 +56,4 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $REGISTRY/${{ env.AWS_REPOSITORY_NAME }}:$IMAGE_TAG .
-          docker push $(docker images -q)
+          docker push $(docker images -q):$IMAGE_TAG
