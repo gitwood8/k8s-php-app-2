@@ -3,7 +3,7 @@ env:
   CI_IMAGE_NAME: "image-${{ github.sha }}"
   CI_CONTAINER_NAME: "test-container"
   CONTAINER_EXTERNAL_PORT: 5555
-  AWS_REPOSITORY_NAME: "k8s-php-app"
+#  AWS_REPOSITORY_NAME: "k8s-php-app"
 
 #  CD_IMAGE_REPO_USER: "wood8"
 #  CD_IMAGE_NAME_VERSION: "github-actions-cicd"
@@ -56,8 +56,8 @@ jobs:
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#          REPOSITORY: ${{ env.AWS_REPOSITORY_NAME }}
+          REPOSITORY: k8s-php-app
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REGISTRY/${{ env.AWS_REPOSITORY_NAME }}:$IMAGE_TAG .
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
